@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 
 public class AEXBanner extends Application{
-   // BannerController bannerController;
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 100;
