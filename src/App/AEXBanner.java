@@ -54,9 +54,8 @@ public class AEXBanner extends Application{
             public void handle(long now) {
                 long lag = now - prevUpdate;
                 if (lag >= NANO_TICKS) {
-                    // calculate new location of text
-                    if(textPosition < (0 - text.getLayoutBounds().getWidth())) {
-                        textPosition = WIDTH;
+                    if (textPosition < 0 - text.getLayoutBounds().getWidth()){
+                       textPosition = WIDTH;
                     }
                     double newPosition = textPosition - 10;
                     text.relocate(newPosition,0);
