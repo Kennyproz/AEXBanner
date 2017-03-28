@@ -1,6 +1,9 @@
 package App;
 
+import javafx.application.Platform;
+
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Ken on 28-3-2017.
@@ -18,7 +21,12 @@ public class BannerController {
 
         // Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
-        // TODO
+        pollingTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                banner.setKoersen("Test");
+            }
+        },0 , 20);
     }
 
     // Stop banner controller
