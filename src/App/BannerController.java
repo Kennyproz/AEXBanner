@@ -7,14 +7,16 @@ import java.util.TimerTask;
 
 /**
  * Created by Ken on 28-3-2017.
+ *
+ * This class provides the link between the effectenbeurs and the banner.
  */
-public class BannerController {
+class BannerController {
 
     private AEXBanner banner;
     private IEffectenbeurs effectenbeurs;
     private Timer pollingTimer;
 
-    public BannerController(AEXBanner banner) {
+    BannerController(AEXBanner banner) {
 
         this.banner = banner;
         this.effectenbeurs = new MockEffectenbeurs();
@@ -30,7 +32,7 @@ public class BannerController {
     }
 
     // Stop banner controller
-    public void stop() {
+    void stop() {
         pollingTimer.cancel();
         // Stop simulation timer of effectenbeurs
         // TODO

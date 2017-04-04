@@ -15,9 +15,9 @@ import javafx.stage.Stage;
 
 public class AEXBanner extends Application{
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 100;
-    public static final int NANO_TICKS = 20000000;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 100;
+    private static final int NANO_TICKS = 20000000;
     // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
     private Text text;
@@ -75,7 +75,7 @@ public class AEXBanner extends Application{
         animationTimer.start();
     }
 
-    public void setKoersen(String koersen) {
+    void setKoersen(String koersen) {
         text.setText(koersen);
         textLength = text.getLayoutBounds().getWidth();
     }

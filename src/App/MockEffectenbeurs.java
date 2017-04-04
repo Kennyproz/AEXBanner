@@ -8,6 +8,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Ken on 28-3-2017.
+ *
+ * This provides a fake beurs to fetch data from.
+ * It refreshes the numbers every second.
  */
 public class MockEffectenbeurs implements IEffectenbeurs {
 
@@ -32,16 +35,15 @@ public class MockEffectenbeurs implements IEffectenbeurs {
     }
 
     private void changeKoersen() {
-
         fonds.clear();
 
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 10);
-        int randomNum1 = ThreadLocalRandom.current().nextInt(1, 10);
-        int randomNum2 = ThreadLocalRandom.current().nextInt(1, 10);
+        double randomNum = ThreadLocalRandom.current().nextDouble(1, 100);
+        double randomNum1 = ThreadLocalRandom.current().nextDouble(1, 100);
+        double randomNum2 = ThreadLocalRandom.current().nextDouble(1, 100);
 
-        fonds.add(new Fonds("Ken", randomNum));
-        fonds.add(new Fonds("Max", randomNum1));
-        fonds.add(new Fonds("GSO", randomNum2));
+        fonds.add(new Fonds("Ken", (double)Math.round(randomNum * 100d) / 100d));
+        fonds.add(new Fonds("Max", (double)Math.round(randomNum1 * 100d) / 100d));
+        fonds.add(new Fonds("GSO", (double)Math.round(randomNum2 * 100d) / 100d));
     }
 
     public void stopRefreshing() {
