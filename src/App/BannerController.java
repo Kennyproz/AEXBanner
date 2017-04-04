@@ -24,9 +24,9 @@ public class BannerController {
         pollingTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                banner.setKoersen("Test");
+                banner.setKoersen(effectenbeurs.getKoersen().toString());
             }
-        },0 , 20);
+        },100, 2000);
     }
 
     // Stop banner controller

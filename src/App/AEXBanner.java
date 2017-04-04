@@ -68,7 +68,7 @@ public class AEXBanner extends Application{
                 prevUpdate = System.nanoTime();
                 textPosition = WIDTH;
                 text.relocate(textPosition, 0);
-                setKoersen("Nothing to display");
+                setKoersen("Fetching data...");
                 super.start();
             }
         };
