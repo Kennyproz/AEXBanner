@@ -24,11 +24,13 @@ public class RMIServer {
     private static final int portNumber = 1099;
 
     // Set binding name for student administration
-    private static final String bindingName = "StudentAdmin";
+    private static final String bindingName = "AEXBanner";
 
     // References to registry and student administration
     private Registry registry = null;
     private MockEffectenbeurs beurs = null;
+    private boolean createRegistry = true;
+
 
     // Constructor
     public RMIServer() {
@@ -63,6 +65,17 @@ public class RMIServer {
             System.out.println("Server: Cannot bind student administration");
             System.out.println("Server: RemoteException: " + ex.getMessage());
         }
+    }
+
+
+    private Registry createRegistry(int portNumber){
+      return null;
+    }
+    private void bindBannerUsingRegistry(){
+
+    }
+    private void bindBannerUsingNaming(int portNumber){
+
     }
 
     // Print IP addresses and network interfaces
