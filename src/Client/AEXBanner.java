@@ -12,6 +12,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.rmi.RemoteException;
+
 
 public class AEXBanner extends Application{
 
@@ -27,7 +29,7 @@ public class AEXBanner extends Application{
     private AnimationTimer animationTimer;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws RemoteException {
 
         controller = new BannerController(this);
 

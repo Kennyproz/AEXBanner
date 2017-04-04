@@ -3,6 +3,7 @@ package Client;
 import Server.IEffectenbeurs;
 import Server.MockEffectenbeurs;
 
+import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,7 +18,7 @@ class BannerController {
     private IEffectenbeurs effectenbeurs;
     private Timer pollingTimer;
 
-    BannerController(AEXBanner banner) {
+    BannerController(AEXBanner banner) throws RemoteException {
 
         this.banner = banner;
         this.effectenbeurs = new MockEffectenbeurs();
