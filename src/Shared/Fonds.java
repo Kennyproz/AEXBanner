@@ -1,4 +1,4 @@
-package App;
+package Shared;
 
 /**
  * Created by Max Meijer on 28/03/2017.

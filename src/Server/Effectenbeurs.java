@@ -1,4 +1,6 @@
-package App;
+package Server;
+
+import Shared.IFonds;
 
 import java.util.List;
 

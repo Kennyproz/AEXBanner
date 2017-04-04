@@ -1,4 +1,4 @@
-package App;
+package Client;
 
 /**
  * Created by Ken on 28-3-2017.

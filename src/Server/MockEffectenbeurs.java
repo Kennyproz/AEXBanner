@@ -1,5 +1,10 @@
-package App;
+package Server;
 
+import Shared.Fonds;
+import Shared.IFonds;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -12,12 +17,12 @@ import java.util.concurrent.ThreadLocalRandom;
  * This provides a fake beurs to fetch data from.
  * It refreshes the numbers every second.
  */
-public class MockEffectenbeurs implements IEffectenbeurs {
+public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenbeurs {
 
     Timer timer;
     ArrayList<IFonds> fonds;
 
-    public MockEffectenbeurs() {
+    public MockEffectenbeurs() throws RemoteException {
         fonds = new ArrayList<>();
 
         timer = new Timer();

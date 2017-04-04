@@ -1,6 +1,7 @@
-package App;
+package Client;
 
-import javafx.application.Platform;
+import Server.IEffectenbeurs;
+import Server.MockEffectenbeurs;
 
 import java.util.Timer;
 import java.util.TimerTask;
