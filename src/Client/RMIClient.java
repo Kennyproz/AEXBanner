@@ -8,6 +8,7 @@ import Server.Effectenbeurs;
 import Server.IEffectenbeurs;
 import Server.MockEffectenbeurs;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.rmi.NotBoundException;
@@ -21,7 +22,7 @@ import java.util.Scanner;
  *
  * @author Nico Kuijpers
  */
-public class RMIClient {
+public class RMIClient extends Application {
 
     // Set binding name for the AEXBanner
     private static final String bindingName = "AEXBanner";
@@ -83,8 +84,7 @@ public class RMIClient {
             System.out.println("Client: Effectenbeurs is null pointer");
         }
 
-        banner = new AEXBanner();
-        //banner.setEffectenBeurs(beurs);
+        banner = new AEXBanner(beurs);
 
         // Test RMI connection
         if (beurs != null) {
@@ -139,12 +139,25 @@ public class RMIClient {
         System.out.print("Client: Enter port number: ");
         int portNumber = input.nextInt();
 
-        RMIClient client = null;
+
 
         // Create client
         try {
-            client = new RMIClient(ipAddress, portNumber);
-        } catch (RemoteException e) {
+
+             Platform.runLater(new Runnable() {
+                 @Override
+                 public void run() {
+                     RMIClient client = null;
+                     try {
+                         client = new RMIClient(ipAddress, portNumber);
+                         client.banner.start(new Stage());
+                     } catch (RemoteException e) {
+                         e.printStackTrace();
+                     }
+
+                 }
+             });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -157,4 +170,8 @@ public class RMIClient {
         return null;
     }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
 }

@@ -30,10 +30,19 @@ public class AEXBanner extends Application{
     private BannerController controller;
     private AnimationTimer animationTimer;
 
+    public AEXBanner(IEffectenbeurs beurs) {
+        try {
+            controller = new BannerController(this);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        setEffectenBeurs(beurs);
+    }
+
     @Override
     public void start(Stage primaryStage) throws RemoteException {
         System.out.println("Starting banner");
-        controller = new BannerController(this);
+
 
         Font font = new Font("Arial", HEIGHT);
         text = new Text();
