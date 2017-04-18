@@ -1,5 +1,6 @@
 package Client;
 
+import Server.Effectenbeurs;
 import Server.IEffectenbeurs;
 import Server.MockEffectenbeurs;
 
@@ -28,9 +29,17 @@ class BannerController {
         pollingTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                banner.setKoersen(effectenbeurs.getKoersen().toString());
+                try {
+                    banner.setKoersen(effectenbeurs.getKoersen().toString());
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         },100, 2000);
+    }
+
+    void setEffectenbeurs(IEffectenbeurs beurs) {
+        this.effectenbeurs = beurs;
     }
 
     // Stop banner controller

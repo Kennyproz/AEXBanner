@@ -3,6 +3,8 @@ package Client;
 /**
  * Created by Ken on 28-3-2017.
  */
+import Server.Effectenbeurs;
+import Server.IEffectenbeurs;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,7 +32,7 @@ public class AEXBanner extends Application{
 
     @Override
     public void start(Stage primaryStage) throws RemoteException {
-
+        System.out.println("Starting banner");
         controller = new BannerController(this);
 
         Font font = new Font("Arial", HEIGHT);
@@ -80,6 +82,10 @@ public class AEXBanner extends Application{
     void setKoersen(String koersen) {
         text.setText(koersen);
         textLength = text.getLayoutBounds().getWidth();
+    }
+
+    public void setEffectenBeurs(IEffectenbeurs beurs) {
+        controller.setEffectenbeurs(beurs);
     }
 
     @Override

@@ -29,17 +29,21 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                changeKoersen();
+                try {
+                    changeKoersen();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         },10,  1000);
     }
 
     @Override
-    public List<IFonds> getKoersen() {
+    public List<IFonds> getKoersen() throws RemoteException {
         return fonds;
     }
 
-    private void changeKoersen() {
+    private void changeKoersen() throws RemoteException{
         fonds.clear();
 
         double randomNum = ThreadLocalRandom.current().nextDouble(1, 100);
@@ -49,6 +53,8 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
         fonds.add(new Fonds("Ken", (double)Math.round(randomNum * 100d) / 100d));
         fonds.add(new Fonds("Max", (double)Math.round(randomNum1 * 100d) / 100d));
         fonds.add(new Fonds("GSO", (double)Math.round(randomNum2 * 100d) / 100d));
+
+        System.out.println("Current at: " + new java.util.Date() + " , " +  fonds);
     }
 
     public void stopRefreshing() {

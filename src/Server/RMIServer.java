@@ -41,9 +41,9 @@ public class RMIServer {
         // Create student administration
         try {
             beurs = new MockEffectenbeurs();
-            System.out.println("Server: Student administration created");
+            System.out.println("Server: beurs created");
         } catch (RemoteException ex) {
-            System.out.println("Server: Cannot create student administration");
+            System.out.println("Server: Cannot create beurs");
             System.out.println("Server: RemoteException: " + ex.getMessage());
             beurs = null;
         }

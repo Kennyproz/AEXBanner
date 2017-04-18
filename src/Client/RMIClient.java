@@ -4,7 +4,11 @@
  */
 package Client;
 
+import Server.Effectenbeurs;
 import Server.IEffectenbeurs;
+import Server.MockEffectenbeurs;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -26,7 +30,7 @@ public class RMIClient {
     private Registry registry = null;
     private IEffectenbeurs beurs = null;
     private boolean localRegistry = true;
-    private BannerController bannerController;
+    private AEXBanner banner;
 
     // Constructor
     public RMIClient(String ipAddress, int portNumber) throws RemoteException {
@@ -54,7 +58,7 @@ public class RMIClient {
 
         // Print contents of registry
         if (registry != null) {
-            printContentsRegistry();
+            //printContentsRegistry();
         }
 
         // Bind Effectenbeurs using registry
@@ -79,18 +83,21 @@ public class RMIClient {
             System.out.println("Client: Effectenbeurs is null pointer");
         }
 
+        banner = new AEXBanner();
+        //banner.setEffectenBeurs(beurs);
+
         // Test RMI connection
         if (beurs != null) {
             testEffectenbeurs();
         }
     }
 
-    private Registry localRegistry (String adress, int portNumber){
+    public Registry localRegistry (String adress, int portNumber){
         return null;
     }
 
     // Print contents of registry
-    private void printContentsRegistry() {
+    public void printContentsRegistry() {
         try {
             String[] listOfNames = registry.list();
             System.out.println("Client: list of names bound in registry:");
@@ -108,52 +115,19 @@ public class RMIClient {
     }
 
     // Test RMI connection
-    private void testEffectenbeurs() throws RemoteException {
-        // Get number of Koersen
-      /*  try {
-            System.out.println("Client: Number of students: " + beurs.getKoersen());
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get number of students");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-        }
-
+    public void testEffectenbeurs() throws RemoteException {
         // Get number of Koersen
         try {
-            System.out.println("Client: Number of students: " + beurs.getKoersen());
+            System.out.println("Current at: " + new java.util.Date() + " , " +  beurs.getKoersen());
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get number of students");
+            System.out.println("Client: Cannot get beurs");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
-        // Get first Koers
-        try {
-            System.out.println("Client: First student: " + beurs.getKoersen(0));
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get first student");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-        }
-
-        // Get second Koers
-        try {
-            System.out.println("Client: Second student: " + beurs.getKoersen(1));
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get second student");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-        }
-
-        // Get third Koers (does not exist)
-        try {
-            System.out.println("Client: Third student: " + beurs.getKoersen(2));
-        } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get third student");
-            System.out.println("Client: RemoteException: " + ex.getMessage());
-        }*/
     }
 
     // Main method
     public static void main(String[] args) {
-
-        // Welcome message
         System.out.println("CLIENT USING REGISTRY");
 
         // Get ip address of server
@@ -165,19 +139,21 @@ public class RMIClient {
         System.out.print("Client: Enter port number: ");
         int portNumber = input.nextInt();
 
+        RMIClient client = null;
+
         // Create client
         try {
-            RMIClient client = new RMIClient(ipAddress, portNumber);
+            client = new RMIClient(ipAddress, portNumber);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    private IEffectenbeurs bindBannerUsingRegistry(){
+    public IEffectenbeurs bindBannerUsingRegistry(){
         return null;
     }
 
-    private IEffectenbeurs bindBannerUsingNaming(String Adress, int portNumber){
+    public IEffectenbeurs bindBannerUsingNaming(String Adress, int portNumber){
         return null;
     }
 
