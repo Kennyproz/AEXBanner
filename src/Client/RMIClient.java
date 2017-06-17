@@ -20,7 +20,7 @@ import java.util.Scanner;
 /**
  * Example of RMI using Registry
  *
- * @author Nico Kuijpers
+ * @author Max Meijer
  */
 public class RMIClient extends Application {
 

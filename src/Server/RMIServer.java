@@ -16,7 +16,7 @@ import java.rmi.registry.Registry;
 /**
  * Example of RMI using Registry
  *
- * @author Nico Kuijpers
+ * @author Max Meijer
  */
 public class RMIServer {
 
@@ -65,17 +65,6 @@ public class RMIServer {
             System.out.println("Server: Cannot bind student administration");
             System.out.println("Server: RemoteException: " + ex.getMessage());
         }
-    }
-
-
-    private Registry createRegistry(int portNumber){
-      return null;
-    }
-    private void bindBannerUsingRegistry(){
-
-    }
-    private void bindBannerUsingNaming(int portNumber){
-
     }
 
     // Print IP addresses and network interfaces
