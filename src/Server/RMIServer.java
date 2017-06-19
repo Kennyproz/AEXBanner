@@ -4,6 +4,9 @@
  */
 package Server;
 
+import Client.ClientCommunicator;
+import fontyspublisher.RemotePublisher;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -30,40 +33,35 @@ public class RMIServer {
     private Registry registry = null;
     private MockEffectenbeurs beurs = null;
     private boolean createRegistry = true;
+    ClientCommunicator communicator;
+    RemotePublisher remotePublisher = null;
 
 
     // Constructor
     public RMIServer() {
 
-        // Print port number for registry
-        System.out.println("Server: Port number " + portNumber);
 
-        // Create student administration
+
+        // Create an instance of RemotePublisher
+        RemotePublisher remotePublisher = null;
+        try {
+            remotePublisher = new RemotePublisher();
+            Registry registry = LocateRegistry.createRegistry(portNumber);
+            //System.setProperty("java.rmi.server.hostname", "localhost");
+            registry.rebind("AEXBanner", remotePublisher);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Remote publisher registered
+        System.out.println("Server started");
+        System.out.println("Port number  : " + portNumber);
+        System.out.println("Binding name : " + "AEXBanner");
+
         try {
             beurs = new MockEffectenbeurs();
-            System.out.println("Server: beurs created");
-        } catch (RemoteException ex) {
-            System.out.println("Server: Cannot create beurs");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
-            beurs = null;
-        }
-
-        // Create registry at port number
-        try {
-            registry = LocateRegistry.createRegistry(portNumber);
-            System.out.println("Server: Registry created on port number " + portNumber);
-        } catch (RemoteException ex) {
-            System.out.println("Server: Cannot create registry");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
-            registry = null;
-        }
-
-        // Bind student administration using registry
-        try {
-            registry.rebind(bindingName, beurs);
-        } catch (RemoteException ex) {
-            System.out.println("Server: Cannot bind student administration");
-            System.out.println("Server: RemoteException: " + ex.getMessage());
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 

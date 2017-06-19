@@ -1,5 +1,6 @@
 package Server;
 
+import Client.ClientCommunicator;
 import Shared.Fonds;
 import Shared.IFonds;
 
@@ -21,6 +22,7 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
 
     Timer timer;
     ArrayList<IFonds> fonds;
+    ClientCommunicator communicator;
 
     public MockEffectenbeurs() throws RemoteException {
         fonds = new ArrayList<>();
@@ -36,6 +38,14 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
                 }
             }
         },10,  1000);
+
+        try {
+            communicator = new ClientCommunicator(null);
+            communicator.connectToServer("localhost", "AEXBanner");
+            communicator.register("UpdateFonds");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,6 +65,8 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
         fonds.add(new Fonds("GSO", (double)Math.round(randomNum2 * 100d) / 100d));
 
         System.out.println("Current at: " + new java.util.Date() + " , " +  fonds);
+        communicator.broadcast("UpdateFonds", fonds);
+
     }
 
     public void stopRefreshing() {

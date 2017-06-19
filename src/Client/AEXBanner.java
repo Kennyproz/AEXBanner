@@ -30,13 +30,12 @@ public class AEXBanner extends Application{
     private BannerController controller;
     private AnimationTimer animationTimer;
 
-    public AEXBanner(IEffectenbeurs beurs) {
-        try {
-            controller = new BannerController(this);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        setEffectenBeurs(beurs);
+    public AEXBanner() {
+//        try {
+//            controller = new BannerController(this);
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -91,10 +90,6 @@ public class AEXBanner extends Application{
     void setKoersen(String koersen) {
         text.setText(koersen);
         textLength = text.getLayoutBounds().getWidth();
-    }
-
-    public void setEffectenBeurs(IEffectenbeurs beurs) {
-        controller.setEffectenbeurs(beurs);
     }
 
     @Override
